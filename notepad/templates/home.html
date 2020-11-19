@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{%block title%} Home {% endblock %}
+{% block content %}
+{% load static %}
+    <h1 class='text-center' >Finished Notes!</h1>
+    <a href="{% url 'create' %}"><h3 class="text-center" >create a note!</h3></a>
+    <hr/>
+    
+        <div class=" row justify-content-center">
+            {% for note in finished_notes %}
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title" >{{note.title}}
+                        <a href="{% url 'delete' note.id %}"><img src="{% static 'trash_can.png' %}"></a>
+                        <a href="{% url 'unfinished_note' note.id %}"><img src="{% static 'unchecked.png' %}"></a>
+                    </h4>    
+                    <a href="{%url 'detail' note.id%}">more info!</a>
+                    <span class=" card-text badge badge-{{note.get_label_display}}">{{note.pub_date}}</span>
+                    <p class="card-text">{{note.notes}}</p>
+                    {{note.completed}}
+                </div> 
+            </div>  
+            {% endfor %}
+        </div>
+
+    <hr/>
+    <h1 class='text-center' >unfinished Notes!</h1>
+    <hr/>
+    <div class=" row justify-content-center">
+        {% for note in unf_notes %}
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" >{{note.title}}
+                    <a href="{% url 'finished_note' note.id %}"><img src="{% static 'check_mark.png' %}"></a>
+                    <a href="{% url 'delete' note.id %}"><img src="{% static 'trash_can.png' %}"></a>
+                </h4>
+                <a href="{%url 'detail' note.id%}">more info!</a>
+                <span class=" card-text badge badge-{{note.get_label_display}}">{{note.pub_date}}</span>
+                <p class="card-text">{{note.short_notes}}</p>
+                {{note.completed}}
+            </div> 
+        </div>  
+        {% endfor %}
+    </div>
+
+
+    
+
+
+{% endblock %}
