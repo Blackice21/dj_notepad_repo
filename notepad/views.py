@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Note
-from .forms import Noteform
+from django.contrib.auth.models import User
+from .forms import Noteform, Userform
 # Create your views here.
 
 # homepage
@@ -14,6 +15,16 @@ def home(request):
         'unf_notes': unfinished_notes
     }
     return render(request, 'home.html', context)
+
+def signupuser(request):
+    if request.method == 'POST':
+        form = Userform(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = Userform()
+        return render(request, 'signupuser.html', {'form':form})
 
 def finished_note(request, id):
     note = get_object_or_404(Note, pk=id)
