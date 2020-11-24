@@ -12,4 +12,11 @@ class Userform(forms.ModelForm):
         model = User
         fields = ['first_name', 'last_name', 'email', 'username', 'password']
 
+class Loginform(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+
+
+
 

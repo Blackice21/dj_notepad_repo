@@ -26,5 +26,7 @@ urlpatterns = [
     path('delete/<int:id>/', views.delete, name='delete'),
     path('finishednote/<int:id>/', views.finished_note, name='finished_note'),
     path('unfinishednote/<int:id>/', views.unfinished_note, name='unfinished_note'),
-    path('signupuser/', views.signupuser, name='signupuser'),   
+    path('signupuser/', views.signupuser, name='signupuser'),
+    path('loginuser/', views.loginuser, name='loginuser'),
+    path('logoutuser/', views.logoutuser, name='logoutuser'),     
 ]
